@@ -1,9 +1,9 @@
 import os
 import unittest
+import string 
 from __main__ import vtk, qt, ctk, slicer
 import time
 import math
-
 
 class LaparoscopyApproachAnalysis:
   def __init__(self, parent):
@@ -11,10 +11,9 @@ class LaparoscopyApproachAnalysis:
     parent.categories = ["IGT"]
     parent.dependencies = []
     parent.contributors = ["Atsushi Yamada (Shiga University of Medical Science),Koichiro Murakami (Shiga University of Medical Science, Japan, SPL), Laurent Chauvin (SPL), Junichi Tokuda (SPL)"] 
-    # parent.helpText = string.Template("""
-    # The Laparoscopy Approach Analysis is used to calculate and visualize the accessibility to liver tumor with a Laparoscopy approach.
-    # See <a href=http://wiki.slicer.org/slicerWiki/index.php/Documentation/Nightly/Extensions/LaparoscopyApproachAnalysis>the online documentation</a> to know how to use in detail.
-    # """).substitute({ 'a':parent.slicerWikiUrl, 'b':slicer.app.majorVersion, 'c':slicer.app.minorVersion })
+    parent.helpText = string.Template("""The Laparoscopy Approach Analysis is used to calculate and visualize the accessibility to liver tumor with a Laparoscopy approach.
+    See <a href=http://wiki.slicer.org/slicerWiki/index.php/Documentation/Nightly/Extensions/LaparoscopyApproachAnalysis>the online documentation</a> to know how to use in detail.
+    """).substitute({ 'a':parent.slicerWikiUrl, 'b':slicer.app.majorVersion, 'c':slicer.app.minorVersion })
     parent.acknowledgementText = """    
     This work is supported by Bio-Medical Innovation Center and Department of Surgery, Shiga University of Medical Science in Japan. 
     This work is also supported in part by the NIH (R01CA111288, P01CA067165, P41RR019703, P41EB015898, R01CA124377, R01CA138586, R42CA137886).
@@ -1096,14 +1095,14 @@ class LaparoscopyApproachAnalysisLogic:
           if skinModelNode != None:
             d = vtk.vtkMath.Distance2BetweenPoints(pSurface, pTarget)
             d = math.sqrt(d)
-            modifiedArea = area * (130 - d) / 130
+            modifiedArea = area * (200 - d) / 200
             
             if d < minDistance or minDistance < 0:
               minDistance = d
               minDistancePoint = [pSurface[0],pSurface[1],pSurface[2]]
             
             v = 0  
-            if d < 130:
+            if d < 200 and 50 < d:
               v = d + 101
               accessibleArea = accessibleArea + modifiedArea
             else:
