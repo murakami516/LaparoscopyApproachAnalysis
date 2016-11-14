@@ -1095,7 +1095,7 @@ class LaparoscopyApproachAnalysisLogic:
           if skinModelNode != None:
             d = vtk.vtkMath.Distance2BetweenPoints(pSurface, pTarget)
             d = math.sqrt(d)
-            modifiedArea = area * (200 - d) / 200
+            # modifiedArea = area * d / 200
             
             if d < minDistance or minDistance < 0:
               minDistance = d
@@ -1104,7 +1104,8 @@ class LaparoscopyApproachAnalysisLogic:
             v = 0  
             if d < 200 and 50 < d:
               v = d + 101
-              accessibleArea = accessibleArea + modifiedArea
+              # accessibleArea = accessibleArea + modifiedArea
+              accessibleArea = accessibleArea + area
             else:
               v = -1.0
               
