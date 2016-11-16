@@ -94,7 +94,7 @@ class LaparoscopyApproachAnalysisWidget:
     parametersFormLayout = qt.QFormLayout(parametersCollapsibleButton)
 
     #
-    # Target point (vtkMRMLMarkupsFiducialNode)
+    # Target point 1(vtkMRMLMarkupsFiducialNode)
     #
     self.targetSelector = slicer.qMRMLNodeComboBox()
     self.targetSelector.nodeTypes = ( ("vtkMRMLMarkupsFiducialNode"), "" )
@@ -105,7 +105,35 @@ class LaparoscopyApproachAnalysisWidget:
     self.targetSelector.showChildNodeTypes = False
     self.targetSelector.setMRMLScene( slicer.mrmlScene )
     self.targetSelector.setToolTip( "Pick up the target point" )
-    parametersFormLayout.addRow("Target Point: ", self.targetSelector)
+    parametersFormLayout.addRow("Target Point 1: ", self.targetSelector)
+
+    #
+    # Target point 2(vtkMRMLMarkupsFiducialNode)
+    #
+    self.targetSelector = slicer.qMRMLNodeComboBox()
+    self.targetSelector.nodeTypes = ( ("vtkMRMLMarkupsFiducialNode"), "" )
+    self.targetSelector.addEnabled = True
+    self.targetSelector.removeEnabled = True
+    self.targetSelector.noneEnabled = True
+    self.targetSelector.showHidden = False
+    self.targetSelector.showChildNodeTypes = False
+    self.targetSelector.setMRMLScene( slicer.mrmlScene )
+    self.targetSelector.setToolTip( "Pick up the target point" )
+    parametersFormLayout.addRow("Target Point 2: ", self.targetSelector)
+
+    #
+    # Target point 3(vtkMRMLMarkupsFiducialNode)
+    #
+    self.targetSelector = slicer.qMRMLNodeComboBox()
+    self.targetSelector.nodeTypes = ( ("vtkMRMLMarkupsFiducialNode"), "" )
+    self.targetSelector.addEnabled = True
+    self.targetSelector.removeEnabled = True
+    self.targetSelector.noneEnabled = True
+    self.targetSelector.showHidden = False
+    self.targetSelector.showChildNodeTypes = False
+    self.targetSelector.setMRMLScene( slicer.mrmlScene )
+    self.targetSelector.setToolTip( "Pick up the target point" )
+    parametersFormLayout.addRow("Target Point 3: ", self.targetSelector)
 
     #
     # Entry point list (vtkMRMLMarkupsFiducialNode)
@@ -231,7 +259,7 @@ class LaparoscopyApproachAnalysisWidget:
     self.accessibilityScore.maximumWidth = 70
     self.accessibilityScore.setReadOnly(True)
     self.accessibilityScore.maxLength = 8
-    outcomesFormLayout.addRow("      Accessibility Score:",self.accessibilityScore)
+    outcomesFormLayout.addRow("Accessibility Score:",self.accessibilityScore)
     
     #
     # Opacity slider
