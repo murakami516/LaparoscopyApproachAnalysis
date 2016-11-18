@@ -96,44 +96,44 @@ class LaparoscopyApproachAnalysisWidget:
     #
     # Target point 1(vtkMRMLMarkupsFiducialNode)
     #
-    self.targetSelector = slicer.qMRMLNodeComboBox()
-    self.targetSelector.nodeTypes = ( ("vtkMRMLMarkupsFiducialNode"), "" )
-    self.targetSelector.addEnabled = True
-    self.targetSelector.removeEnabled = True
-    self.targetSelector.noneEnabled = True
-    self.targetSelector.showHidden = False
-    self.targetSelector.showChildNodeTypes = False
-    self.targetSelector.setMRMLScene( slicer.mrmlScene )
-    self.targetSelector.setToolTip( "Pick up the target point" )
-    parametersFormLayout.addRow("Target Point 1: ", self.targetSelector)
+    self.targetSelector1 = slicer.qMRMLNodeComboBox()
+    self.targetSelector1.nodeTypes = ( ("vtkMRMLMarkupsFiducialNode"), "" )
+    self.targetSelector1.addEnabled = True
+    self.targetSelector1.removeEnabled = True
+    self.targetSelector1.noneEnabled = True
+    self.targetSelector1.showHidden = False
+    self.targetSelector1.showChildNodeTypes = False
+    self.targetSelector1.setMRMLScene( slicer.mrmlScene )
+    self.targetSelector1.setToolTip( "Pick up the target point 1" )
+    parametersFormLayout.addRow("Target Point 1: ", self.targetSelector1)
 
     #
     # Target point 2(vtkMRMLMarkupsFiducialNode)
     #
-    self.targetSelector = slicer.qMRMLNodeComboBox()
-    self.targetSelector.nodeTypes = ( ("vtkMRMLMarkupsFiducialNode"), "" )
-    self.targetSelector.addEnabled = True
-    self.targetSelector.removeEnabled = True
-    self.targetSelector.noneEnabled = True
-    self.targetSelector.showHidden = False
-    self.targetSelector.showChildNodeTypes = False
-    self.targetSelector.setMRMLScene( slicer.mrmlScene )
-    self.targetSelector.setToolTip( "Pick up the target point" )
-    parametersFormLayout.addRow("Target Point 2: ", self.targetSelector)
+    self.targetSelector2 = slicer.qMRMLNodeComboBox()
+    self.targetSelector2.nodeTypes = ( ("vtkMRMLMarkupsFiducialNode"), "" )
+    self.targetSelector2.addEnabled = True
+    self.targetSelector2.removeEnabled = True
+    self.targetSelector2.noneEnabled = True
+    self.targetSelector2.showHidden = False
+    self.targetSelector2.showChildNodeTypes = False
+    self.targetSelector2.setMRMLScene( slicer.mrmlScene )
+    self.targetSelector2.setToolTip( "Pick up the target point 2" )
+    parametersFormLayout.addRow("Target Point 2: ", self.targetSelector2)
 
     #
     # Target point 3(vtkMRMLMarkupsFiducialNode)
     #
-    self.targetSelector = slicer.qMRMLNodeComboBox()
-    self.targetSelector.nodeTypes = ( ("vtkMRMLMarkupsFiducialNode"), "" )
-    self.targetSelector.addEnabled = True
-    self.targetSelector.removeEnabled = True
-    self.targetSelector.noneEnabled = True
-    self.targetSelector.showHidden = False
-    self.targetSelector.showChildNodeTypes = False
-    self.targetSelector.setMRMLScene( slicer.mrmlScene )
-    self.targetSelector.setToolTip( "Pick up the target point" )
-    parametersFormLayout.addRow("Target Point 3: ", self.targetSelector)
+    self.targetSelector3 = slicer.qMRMLNodeComboBox()
+    self.targetSelector3.nodeTypes = ( ("vtkMRMLMarkupsFiducialNode"), "" )
+    self.targetSelector3.addEnabled = True
+    self.targetSelector3.removeEnabled = True
+    self.targetSelector3.noneEnabled = True
+    self.targetSelector3.showHidden = False
+    self.targetSelector3.showChildNodeTypes = False
+    self.targetSelector3.setMRMLScene( slicer.mrmlScene )
+    self.targetSelector3.setToolTip( "Pick up the target point 3" )
+    parametersFormLayout.addRow("Target Point 3: ", self.targetSelector3)
 
     #
     # Entry point list (vtkMRMLMarkupsFiducialNode)
@@ -221,7 +221,9 @@ class LaparoscopyApproachAnalysisWidget:
 
     # connections
     self.applyButton.connect('clicked(bool)', self.onApplyButton)
-    self.targetSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
+    self.targetSelector1.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
+    self.targetSelector2.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
+    self.targetSelector3.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
     self.targetModelSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
     self.obstacleModelSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
     self.skinModelSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
@@ -576,9 +578,21 @@ class LaparoscopyApproachAnalysisWidget:
     self.allPaths.SetOpacity(newValue/1000.0)
 
   def onSelect(self):
-    if (self.targetSelector.currentNode() != None) and (self.obstacleModelSelector.currentNode() != None) and (self.skinModelSelector.currentNode() != None):
+    if (self.targetSelector1.currentNode() != None) and (self.obstacleModelSelector.currentNode() != None) and (self.skinModelSelector.currentNode() != None):
       self.applyButton.enabled = True
-    if (self.targetModelSelector.currentNode() != None) and (self.obstacleModelSelector.currentNode() != None) and (self.skinModelSelector.currentNode() != None):
+    if (self.targetModelSelector1.currentNode() != None) and (self.obstacleModelSelector.currentNode() != None) and (self.skinModelSelector.currentNode() != None):
+      self.applyButton.enabled = True
+      self.targetSwitch = 1
+    
+    if (self.targetSelector2.currentNode() != None) and (self.obstacleModelSelector.currentNode() != None) and (self.skinModelSelector.currentNode() != None):
+      self.applyButton.enabled = True
+    if (self.targetModelSelector2.currentNode() != None) and (self.obstacleModelSelector.currentNode() != None) and (self.skinModelSelector.currentNode() != None):
+      self.applyButton.enabled = True
+      self.targetSwitch = 1
+
+    if (self.targetSelector3.currentNode() != None) and (self.obstacleModelSelector.currentNode() != None) and (self.skinModelSelector.currentNode() != None):
+      self.applyButton.enabled = True
+    if (self.targetModelSelector3.currentNode() != None) and (self.obstacleModelSelector.currentNode() != None) and (self.skinModelSelector.currentNode() != None):
       self.applyButton.enabled = True
       self.targetSwitch = 1
 
@@ -667,7 +681,9 @@ class LaparoscopyApproachAnalysisWidget:
   def onApplyButton(self):
     logic = LaparoscopyApproachAnalysisLogic()
     print("onApplyButton() is called ")
-    targetPoint = self.targetSelector.currentNode()
+    targetPoint1 = self.targetSelector1.currentNode()
+    targetPoint2 = self.targetSelector2.currentNode()
+    targetPoint3 = self.targetSelector3.currentNode()
     targetModel = self.targetModelSelector.currentNode()
     obstacleModel = self.obstacleModelSelector.currentNode()
     skinModel = self.skinModelSelector.currentNode()
@@ -677,7 +693,7 @@ class LaparoscopyApproachAnalysisWidget:
     self.onDeleteTransformsButton() 
 
     # make all paths
-    self.pathReceived, self.nPathReceived, self.apReceived, self.minimumPoint, self.minimumDistance, self.maximumPoint, self.maximumDistance = logic.makePaths(targetPoint, targetModel, 0, obstacleModel, skinModel)
+    self.pathReceived, self.nPathReceived, self.apReceived, self.minimumPoint, self.minimumDistance, self.maximumPoint, self.maximumDistance = logic.makePaths(targetPoint1, targetPoint2, targetPoint3, targetModel, 0, obstacleModel, skinModel)
     # display all paths model
     self.modelReceived, pReceived, self.allPaths, self.allPathPoints = NeedlePathModel().make(self.pathReceived, self.nPathReceived, self.VISIBLE, self.yellow, "candidatePaths", self.allLines)
 
@@ -739,7 +755,7 @@ class LaparoscopyApproachAnalysisWidget:
 
     # make color mapped skin
     start = time.time()
-    (score, mind, mindp) = logic.runPointWise(targetPoint, obstacleModel, skinModel)
+    (score, mind, mindp) = logic.runPointWise(targetPoint1, obstacleModel, skinModel)
       
     self.accessibilityScore.text = round(score,1)
 
